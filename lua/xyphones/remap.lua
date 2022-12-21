@@ -9,3 +9,5 @@ vim.keymap.set("n", "<C-q>", function()
   local action = qf_winid > 0 and 'cclose' or 'copen'
   vim.cmd('botright '..action)
 end)
+
+vim.keymap.set("i", "{<CR>", "{<CR>}<C-o>O");
