@@ -1,7 +1,12 @@
+local options = {
+  guicursor = "",
+  number = true,
+}
+
 vim.opt.guicursor = "";
 vim.opt.number = true
 vim.opt.relativenumber = true
-
+vim.opt.cursorlineopt = "number"
 
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
@@ -14,7 +19,7 @@ vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undodir = os.getenv("XDG_CACHE_DIR") .. "/vim/undodir"
 vim.opt.undofile = true
 
 vim.opt.hlsearch = false
@@ -29,5 +34,3 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "120"
-
-vim.g.mapleader = " "

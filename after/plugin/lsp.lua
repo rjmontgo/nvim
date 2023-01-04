@@ -9,6 +9,11 @@ lsp.ensure_installed({
   'sumneko_lua',
 })
 
+local lspconfig = require('lspconfig')
+
+lspconfig.sumneko_lua.setup(lsp.build_options('sumneko_lua', lsp.defaults.nvim_workspace()));
+
+
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 local cmp_mappings = lsp.defaults.cmp_mappings({

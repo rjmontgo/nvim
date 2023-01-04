@@ -19,5 +19,5 @@ require'nvim-treesitter.configs'.setup {
 -- did this by using :TSHighlightCapturesUnderCursor to determine that the tree sitter capture group
 -- was "@tag.attribute" then used other elements to determine what capture group is linked to a color. 
 -- In this case it was blue.
-vim.api.nvim_set_hl(0, "@tag.attribute", { link = "Blue" })
+-- vim.api.nvim_set_hl(0, "@tag.attribute", { link = "Blue" })
 

@@ -1,13 +1,20 @@
+local opts = { remap = false, silent = true }
+
+local keymap = vim.keymap.set;
+
+
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-vim.keymap.set("n", "<leader><CR>", ":so ~/.config/nvim/init.lua<CR>")
-vim.keymap.set("n", "<C-j>", ":cnext<CR>")
-vim.keymap.set("n", "<C-k>", ":cprev<CR>")
-vim.keymap.set("n", "<C-q>", function() 
-  local qf_winid = vim.fn.getqflist({ winid = 0 }).winid
-  local action = qf_winid > 0 and 'cclose' or 'copen'
-  vim.cmd('botright '..action)
-end)
+--- Normal Mode ---
+-- resize windows easily
+keymap("n", "<C-Up>", ":resize +2<CR>", opts)
+keymap("n", "<C-Down>", ":resize -2<CR>", opts)
+keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
+keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
-vim.keymap.set("i", "{<CR>", "{<CR>}<C-o>O");
+
+--- File Navigation
+keymap("n", "<leader>e", vim.cmd.Lex)
+keymap("n", "<leader><CR>", ":so ~/.config/nvim/init.lua<CR>")
+keymap("n", "<leader>f", vim.lsp.buf.format)
+

@@ -1,4 +1,4 @@
-require("xyphones.set")
+require("xyphones.options")
 require("xyphones.remap")
 require("xyphones.packer")
 
