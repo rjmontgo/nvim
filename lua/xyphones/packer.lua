@@ -3,7 +3,7 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  use { 'ryanoasis/vim-devicons' }
+  use "windwp/nvim-autopairs"
 
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.0',
@@ -46,5 +46,6 @@ return require('packer').startup(function(use)
       { 'rafamadriz/friendly-snippets' },
     }
   }
+
 
 end)

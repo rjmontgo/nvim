@@ -30,6 +30,7 @@ local options = {
   splitright = true,
   updatetime = 300,
   numberwidth = 4,
+  cursorline = true,
 }
 
 for k, v in pairs(options) do

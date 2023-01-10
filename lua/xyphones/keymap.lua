@@ -14,7 +14,7 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 
 --- File Navigation
-keymap("n", "<leader>e", vim.cmd.Lex)
+keymap("n", "<leader>e", vim.cmd.Ex)
 keymap("n", "<leader><CR>", ":so ~/.config/nvim/init.lua<CR>")
 keymap("n", "<leader>f", vim.lsp.buf.format)
 
