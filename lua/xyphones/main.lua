@@ -14,8 +14,11 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  'rebelot/kanagawa.nvim',
+  'Mofiqul/dracula.nvim',
   'ixru/nvim-markdown',
+  'williamboman/mason.nvim',
+  'github/copilot.vim',
+
 
   'jose-elias-alvarez/null-ls.nvim',
 
