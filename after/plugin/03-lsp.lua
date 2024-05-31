@@ -6,12 +6,21 @@ end
 local luasnip = require("luasnip")
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities();
-local servers = { "tsserver", "gopls", "lua_ls" };
+local servers = { "tsserver", "gopls", "lua_ls", "emmet_language_server", "golangci_lint_ls" };
+
+vim.cmd("hi NormalFloat guibg=#32302f")
+vim.cmd("hi FloatBorder guifg=#f2e2c3 guibg=#32302f")
+
+local handlers = {
+  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+  ["textDocument/signature_help"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+}
 
 for _, lsp in ipairs(servers) do
   if lsp == "lua_ls" then
     lspconfig["lua_ls"].setup {
       capabilitities = capabilities,
+      handlers = handlers,
       settings = {
         Lua = {
           diagnostics = {
@@ -22,14 +31,33 @@ for _, lsp in ipairs(servers) do
     }
   else
     lspconfig[lsp].setup {
+      handlers = handlers,
       capabilities = capabilities,
     }
   end
 end
 
 -- lsp actions
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+-- diagnostics
+
+vim.diagnostic.config {
+  signs = true,
+  underline = true,
+  virtual_text = false,
+  virtual_lines = false,
+  update_in_insert = true,
+  float = {
+    header = false,
+    border = 'rounded',
+    focusable = true
+  }
+}
+
+
+
+vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev({ open_float = true }) end)
+vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next({ open_float = true }) end)
+
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -42,6 +70,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
 
     vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 
@@ -73,3 +102,7 @@ cmp.setup {
     { name = "nvim_lsp" },
   },
 }
+
+
+-- filetype fixes
+vim.filetype.add({ extension = { mod = "gomod" } })

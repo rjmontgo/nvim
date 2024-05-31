@@ -14,11 +14,21 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  'Mofiqul/dracula.nvim',
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
+  },
   'ixru/nvim-markdown',
   'williamboman/mason.nvim',
   'github/copilot.vim',
-
+  'rebelot/kanagawa.nvim',
+  {
+    'numToStr/Comment.nvim',
+    lazy = false,
+  },
 
   'jose-elias-alvarez/null-ls.nvim',
 
@@ -34,46 +44,6 @@ require("lazy").setup({
 
   'tpope/vim-fugitive',
   {
-    'nvim-orgmode/orgmode',
-    dependencies = {
-      { 'nvim-treesitter/nvim-treesitter', lazy = true },
-    },
-    event = 'VeryLazy',
-    config = function()
-      -- Load treesitter grammar for org
-      require('orgmode').setup_ts_grammar()
-
-      -- Setup treesitter
-      require('nvim-treesitter.configs').setup({
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = { 'org' },
-        },
-        ensure_installed = { 'org' },
-      })
-
-      -- Setup orgmode
-      require('orgmode').setup({
-        org_agenda_files = '~/orgfiles/**/*',
-        org_default_notes_file = '~/orgfiles/refile.org',
-      })
-    end,
-  },
-  {
-    "michaelb/sniprun",
-    branch = "master",
-
-    build = "sh install.sh",
-    -- do 'sh install.sh 1' if you want to force compile locally
-    -- (instead of fetching a binary from the github release). Requires Rust >= 1.65
-
-    config = function()
-      require("sniprun").setup({
-        -- your options
-      })
-    end,
-  },
-  {
     'nvim-telescope/telescope.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim'
@@ -86,4 +56,14 @@ require("lazy").setup({
       'nvim-lua/plenary.nvim'
     },
   },
+
+  {
+    'mfussenegger/nvim-dap',
+    dependencies = {
+      'nvim-neotest/nvim-nio',
+      'leoluz/nvim-dap-go',
+      'rcarriga/nvim-dap-ui',
+      'nvim-telescope/telescope-dap.nvim',
+    },
+  }
 })
