@@ -4,9 +4,11 @@ if not status_ok then
 end
 
 local luasnip = require("luasnip")
+local util = require("lspconfig/util")
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities();
-local servers = { "tsserver", "gopls", "lua_ls", "emmet_language_server", "golangci_lint_ls" };
+local servers = { "tsserver", "gopls", "lua_ls", "emmet_language_server", "golangci_lint_ls", "svelte",
+  "kotlin_language_server", "eslint" };
 
 vim.cmd("hi NormalFloat guibg=#32302f")
 vim.cmd("hi FloatBorder guifg=#f2e2c3 guibg=#32302f")
@@ -27,6 +29,23 @@ for _, lsp in ipairs(servers) do
             globals = { 'vim' }
           }
         }
+      }
+    }
+  elseif lsp == "kotlin_language_server" then
+    lspconfig["kotlin_language_server"].setup {
+      handlers = handlers,
+      capabilities = capabilities,
+      settings = {
+        kotlin = {
+          compiler = {
+            jvm = {
+              target = "17"
+            }
+          }
+        }
+      },
+      init_options = {
+        storage_path = util.path.join(vim.env.XDG_DATA_HOME, "nvim")
       }
     }
   else
@@ -61,7 +80,7 @@ vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next({ open_float = tru
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-  callback = function (ev)
+  callback = function(ev)
     local opts = { buffer = ev.buf };
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
@@ -74,7 +93,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 
-    vim.keymap.set("n", "<leader>f", function ()
+    vim.keymap.set("n", "<leader>f", function()
       vim.lsp.buf.format({ async = true })
     end, opts)
   end
@@ -100,7 +119,9 @@ cmp.setup {
   }),
   sources = {
     { name = "nvim_lsp" },
+    { name = 'luasnip' },
   },
+
 }
 
 

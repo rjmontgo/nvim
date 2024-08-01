@@ -29,7 +29,7 @@ local options = {
   splitbelow = true,
   splitright = true,
   updatetime = 300,
-  numberwidth = 4,
+  numberwidth = 3,
   cursorline = true,
 }
 

@@ -1,4 +1,5 @@
 local api = vim.api
+print("hello from autocmd.lua")
 
 api.nvim_command("autocmd TermOpen * startinsert") -- start terminal in insert mode
 api.nvim_command("autocmd TermOpen * setlocal nonumber") -- disable line numbers

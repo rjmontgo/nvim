@@ -32,7 +32,13 @@ require("lazy").setup({
 
   'jose-elias-alvarez/null-ls.nvim',
 
-  'L3MON4D3/LuaSnip',
+  {
+    'L3MON4D3/LuaSnip',
+    lazy = false,
+    dependencies = {
+      'saadparwaiz1/cmp_luasnip',
+    },
+  },
 
   'nvim-treesitter/nvim-treesitter',
   'nvim-treesitter/playground',

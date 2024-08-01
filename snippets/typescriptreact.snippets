@@ -1,3 +1,41 @@
+snippet test "test"
+  console.log('${1:name} ${1:name} ${2:other}')
 
-snippet test
-  console.log('${1:name}')
+
+snippet storybook "template for a storybook file"
+	import { Meta, StoryFn } from '@storybook/react';
+	import {
+		${1} as ${1}Component,
+		${1}Props,
+	} from './${1}';
+	import { action } from '@storybook/addon-actions';
+
+	export default {
+		title: 'Components/${1}',
+		component: ${1}Component,
+	} as Meta<${1}Props>;
+
+	export const ${1}: StoryFn<${1}Props> = (args) => (
+		<${1}Component {...args} />
+	);
+	${1}.args = {
+		buttonSize: 'large',
+		onClick: action('close button clicked!'),
+	};
+
+snippet react "base react component"
+	export type ${1}Props = {};
+
+	/**
+	 * 
+	 * @param props
+	 * @returns
+	 */
+	export const ${1} = (props: ${1}Props) => {
+		return (
+			<div>
+				Hello world
+			</div>
+		);
+	};
+
