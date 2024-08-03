@@ -11,7 +11,7 @@ return {
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
     },
-    config = function() 
+    config = function()
       local cmp = require "cmp"
       cmp.setup {
         sources = {
@@ -19,6 +19,11 @@ return {
           { name = "path" },
           { name = "buffer" },
           { name = "luasnip" },
+        },
+        snippet = {
+          expand = function(args)
+            vim.snippet.expand(args.body)
+          end,
         },
         mapping = cmp.mapping.preset.insert({
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
