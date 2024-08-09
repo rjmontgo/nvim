@@ -1,8 +1,8 @@
 return {
   {
-    "rebelot/kanagawa.nvim",
+    "catppuccin/nvim",
     config = function()
-      vim.cmd.colorscheme "kanagawa"
+      vim.cmd.colorscheme "catppuccin"
     end,
   },
 }
