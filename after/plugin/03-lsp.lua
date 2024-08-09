@@ -8,7 +8,7 @@ local util = require("lspconfig/util")
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities();
 local servers = { "tsserver", "gopls", "lua_ls", "emmet_language_server", "golangci_lint_ls", "svelte",
-  "kotlin_language_server", "eslint" };
+  "kotlin_language_server", "eslint", "marksman" };
 
 vim.cmd("hi NormalFloat guibg=#32302f")
 vim.cmd("hi FloatBorder guifg=#f2e2c3 guibg=#32302f")

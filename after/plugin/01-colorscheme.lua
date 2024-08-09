@@ -1,4 +1,4 @@
-local colorscheme = "kanagawa";
+local colorscheme = "catppuccin";
 local status_ok, _ = pcall(require, colorscheme);
 
 if not status_ok then
@@ -6,7 +6,7 @@ if not status_ok then
   colorscheme = "default"
 end
 
-local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
+local status_ok, _ = pcall(vim.cmd, "colorscheme catppuccin-latte")
 
 if not status_ok then
   vim.notify("[after/01-colorscheme.lua] Could not require colorscheme " .. colorscheme);

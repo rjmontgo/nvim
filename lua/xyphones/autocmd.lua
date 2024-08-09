@@ -1,12 +1,10 @@
 local api = vim.api
-print("hello from autocmd.lua")
 
 api.nvim_command("autocmd TermOpen * startinsert") -- start terminal in insert mode
 api.nvim_command("autocmd TermOpen * setlocal nonumber") -- disable line numbers
 api.nvim_command("autocmd TermOpen * setlocal signcolumn=no") --disable signcolumn
 
 vim.keymap.set("t", "<esc>", "<C-\\><C-n>")
-
 
 vim.api.nvim_create_user_command("GitLink", function ()
 end, {})

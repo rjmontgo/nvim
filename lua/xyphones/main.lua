@@ -21,6 +21,8 @@ require("lazy").setup({
       'nvim-tree/nvim-web-devicons',
     },
   },
+  'catppuccin/nvim',
+  'rose-pine/neovim',
   'ixru/nvim-markdown',
   'williamboman/mason.nvim',
   'github/copilot.vim',
