@@ -28,8 +28,9 @@ return {
         mapping = cmp.mapping.preset.insert({
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
-          ["<C-n>"] = cmp.select_next_item,
-          ["<C-p>"] = cmp.select_prev_item,
+          -- TODO: not sure why this makes
+          -- ["<C-n>"] = cmp.select_next_item,
+          -- ["<C-p>"] = cmp.select_prev_item,
           ["<C-y>"] = cmp.mapping.confirm({ select = true }),
         }),
       }

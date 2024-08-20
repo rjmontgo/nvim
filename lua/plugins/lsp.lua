@@ -14,9 +14,16 @@ return {
         capabilities = require("cmp_nvim_lsp").default_capabilities()
       end
 
+      local handlers = {
+        ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+        ["textDocument/signature_help"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+      }
+
       local servers = {
         bashls = true,
         tsserver = true,
+        marksman = true,
+        gopls = true,
         lua_ls = {
           on_init = function(client)
             local path = client.workspace_folders[1].name
@@ -49,6 +56,7 @@ return {
 
         config = vim.tbl_deep_extend("force", {}, {
           capabilities = capabilities,
+          handlers = handlers
         }, config)
 
         lspconfig[name].setup(config)
@@ -71,17 +79,49 @@ return {
           vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
 
           vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-
-          vim.keymap.set("n", "<leader>f", function()
-            vim.lsp.buf.format({ async = true })
-          end, opts)
         end
       })
+
+      vim.diagnostic.config {
+        signs = true,
+        underline = true,
+        virtual_text = false,
+        virtual_lines = false,
+        update_in_insert = true,
+        float = {
+          header = '',
+          border = 'rounded',
+          focusable = true,
+        }
+      }
+
+      vim.keymap.set("n", "[d", function()
+        vim.diagnostic.goto_prev({ open_float = true })
+      end)
+
+      vim.keymap.set("n", "]d", function()
+        vim.diagnostic.goto_next({ open_float = true })
+      end)
+
+      -- formatter setup
+      local conform = require('conform')
+      conform.setup {
+        formatters_by_ft = {
+          javascript = { 'prettierd' },
+          typescript = { 'prettierd' },
+          typescriptreact = { 'prettierd' },
+          go = { 'gofmt' }
+        }
+      }
+
+      vim.keymap.set("n", "<leader>f", function()
+        conform.format()
+      end)
 
       -- autoformatting on save
       vim.api.nvim_create_autocmd("BufWritePre", {
         callback = function(args)
-          require("conform").format {
+          conform.format {
             bufnr = args.buf,
             lsp_fallback = true,
             quiet = true,
