@@ -2,6 +2,7 @@ local set = vim.keymap.set
 
 vim.g.xy_win_id = nil
 
+
 set("n", "<leader>t", function()
   if (vim.g.xy_win_id and vim.api.nvim_win_is_valid(vim.g.xy_win_id)) then
     vim.api.nvim_win_close(vim.g.xy_win_id, true)
@@ -26,6 +27,16 @@ set("n", "<leader>t", function()
     title = "todo",
     title_pos = "center",
     border = "rounded"
+  })
+
+  -- close the buffer when losing focus from the todo
+  vim.api.nvim_create_autocmd("WinLeave", {
+    group = vim.api.nvim_create_augroup("xy_clear", { clear = true }),
+    callback = function()
+      print(vim.api.nvim_buf_get_name(bufnr))
+      vim.cmd [[close]]
+      vim.api.nvim_del_augroup_by_name("xy_clear")
+    end
   })
 
   vim.cmd('edit ' .. git_dir_path)

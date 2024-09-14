@@ -4,6 +4,23 @@ return {
     'nvim-lua/plenary.nvim'
   },
   config = function()
+    require('telescope').setup {
+      defaults = {
+        layout_strategy = "vertical",
+        layout_config = {
+          vertical = {
+            prompt_position = 'top',
+            preview_cutoff = 1
+          }
+        },
+        prompt_prefix = '🔍 ',
+        path_display = {
+          filename_first = {
+            reverse_directories = false
+          }
+        },
+      }
+    }
     local set = vim.keymap.set
     local builtin = require('telescope.builtin')
     set('n', '<leader>ls', builtin.find_files, {})

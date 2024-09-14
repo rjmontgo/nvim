@@ -24,6 +24,7 @@ return {
         tsserver = true,
         marksman = true,
         gopls = true,
+        svelte = true,
         lua_ls = {
           on_init = function(client)
             local path = client.workspace_folders[1].name
