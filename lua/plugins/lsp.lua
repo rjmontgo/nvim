@@ -31,7 +31,7 @@ return {
 
       local servers = {
         vtsls = true,
-        svelte = true
+        svelte = true,
       }
 
       for name, config in pairs(servers) do
