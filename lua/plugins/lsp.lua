@@ -32,6 +32,7 @@ return {
       local servers = {
         vtsls = true,
         svelte = true,
+        basedpyright = true,
       }
 
       for name, config in pairs(servers) do
@@ -73,7 +74,8 @@ return {
           javascript = { 'prettierd' },
           typescript = { 'prettierd' },
           typescriptreact = { 'prettierd' },
-          svelte = { 'prettierd' }
+          svelte = { 'prettierd' },
+          html = { 'prettierd' }
         }
       }
 
