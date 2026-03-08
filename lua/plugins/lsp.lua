@@ -50,7 +50,7 @@ return {
         callback = function(ev)
           local opts = { buffer = ev.buf };
           vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-          vim.keymap.set("n", "<C-h>", vim.lsp.buf.signature_help, opts)
+          vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
           vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
           vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
@@ -74,6 +74,8 @@ return {
           javascript = { 'prettierd' },
           typescript = { 'prettierd' },
           typescriptreact = { 'prettierd' },
+          json = { 'prettierd' },
+          jsonc = { 'pretterd' },
           svelte = { 'prettierd' },
           html = { 'prettierd' }
         }
