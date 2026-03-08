@@ -7,8 +7,6 @@ return {
       "stevearc/conform.nvim"
     },
     config = function() 
-      local lsp = require "lspconfig"
-
       local cmp_capabilites = require "cmp_nvim_lsp".default_capabilities()
 
       local handlers = {
@@ -38,8 +36,10 @@ return {
       for name, config in pairs(servers) do
         if config == true then
           config = {}
+        else
+          vim.lsp.config(name, config)
         end
-        lsp[name].setup(config)
+        vim.lsp.enable(name)
       end
 
       -- setup mason right after setting up servers

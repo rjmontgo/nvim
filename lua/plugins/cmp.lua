@@ -13,8 +13,12 @@ return {
     cmp.setup {
       sources = {
         { name = "nvim_lsp" },
+        { name = "minuet" },
         { name = "path" },
         { name = "buffer" }
+      },
+      performance = {
+        fetching_timeout = 2000,
       },
       mapping = cmp.mapping.preset.insert({
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
